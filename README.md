@@ -97,3 +97,10 @@ You can find a nice swagger documentation on http://localhost:8000/swagger/
 There is also a redoc documentation on http://localhost:8000/redoc/
 
 Or yet, the broseable API on http://localhost:8000/bookstore/
+
+
+## Live version
+
+App is running on Heroku!
+
+https://olist-bookstore.herokuapp.com/
