@@ -7,7 +7,13 @@ from bookstore.serializers import AuthorSerializer, BookSerializer
 class BookViewSet(viewsets.ModelViewSet):
     queryset = Book.objects.all()
     serializer_class = BookSerializer
-    filterset_fields = ["name", "publication_year", "edition", "authors"]
+    filterset_fields = {
+        "name": ["icontains", "iexact", "contains", "exact"],
+        "publication_year": ["exact", "lte", "lt", "gte", "gt"],
+        "edition": ["icontains", "iexact", "contains", "exact"],
+        "authors": ["exact"],
+        "authors__name": ["icontains", "iexact", "contains", "exact"],
+    }
 
 
 class AuthorsViewSet(viewsets.ReadOnlyModelViewSet):
