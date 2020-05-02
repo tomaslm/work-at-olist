@@ -16,6 +16,7 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 from django.urls import include, path
+from django.views.generic.base import RedirectView
 from drf_yasg import openapi
 from drf_yasg.views import get_schema_view
 from rest_framework import permissions
@@ -50,4 +51,5 @@ urlpatterns = [
     #
     path("admin/", admin.site.urls),
     path("bookstore/", include("bookstore.urls")),
+    url("", RedirectView.as_view(url="/swagger/")),
 ]
