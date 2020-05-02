@@ -32,6 +32,11 @@ Then install requirements:
 pip install -r requirements.txt
 ```
 
+This project uses dotenv to separate config from code
+Copy [.env.sample](.env.sample) to a gitignored file .env
+Change Debug, database connection and secret key on .env file
+It is also possible to add new environment variables.
+
 ## Testing
 
 To run all the tests run:
