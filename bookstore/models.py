@@ -14,9 +14,9 @@ class Author(models.Model):
 
 
 class Book(models.Model):
-    name = models.CharField(max_length=255)
-    edition = models.CharField(max_length=255)
-    publication_year = models.IntegerField()
+    name = models.CharField(max_length=255, null=False, blank=False)
+    edition = models.CharField(max_length=255, blank=True)
+    publication_year = models.IntegerField(null=False)
     authors = models.ManyToManyField(Author)
 
     class Meta:

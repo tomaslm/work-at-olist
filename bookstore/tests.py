@@ -1,7 +1,7 @@
 from django.core.validators import ValidationError
 from django.test import TestCase
 
-from bookstore.models import Author
+from bookstore.models import Author, Book
 
 
 class AuthorTest(TestCase):
@@ -36,3 +36,39 @@ class AuthorTest(TestCase):
             msg="Shouldn't be possible add two authors with same name",
         ):
             Author(name="sample").full_clean()
+
+
+class BookTest(TestCase):
+    def test_simple_valid_book(self):
+        Book(name="Book Name", publication_year=2020).full_clean()
+
+    def test_blank_name(self):
+        with self.assertRaises(
+            ValidationError,
+            msg="Shouldn't be possible create Book with blank name",
+        ):
+            Book(name="", publication_year=2020).full_clean()
+
+    def test_null_name(self):
+        with self.assertRaises(
+            ValidationError,
+            msg="Shouldn't be possible create Book with null name",
+        ):
+            Book(name=None, publication_year=2020).full_clean()
+
+    def test_long_name(self):
+        name = "L" + ("o" * 253) + "ng"
+        with self.assertRaises(
+            ValidationError, msg="Shouldn't be possible create Book long name",
+        ):
+            Book(name=name, publication_year=2020).full_clean()
+
+    def test_long_edition(self):
+        edition = "L" + ("o" * 253) + "ng"
+        with self.assertRaises(
+            ValidationError,
+            msg="Shouldn't be possible create Book long edition",
+        ):
+            Book(
+                name="Sample Name", edition=edition, publication_year=2020
+            ).full_clean()
